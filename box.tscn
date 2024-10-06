@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://c741i2fb1xkou"]
+
+[ext_resource type="Texture2D" uid="uid://cnn2dvf28ivx0" path="res://tiles.png" id="1_yria3"]
+
+[sub_resource type="PhysicsMaterial" id="PhysicsMaterial_sgfxd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k65ld"]
+size = Vector2(16, 16)
+
+[node name="RigidBody2D" type="RigidBody2D"]
+collision_layer = 2
+collision_mask = 3
+physics_material_override = SubResource("PhysicsMaterial_sgfxd")
+lock_rotation = true
+metadata/_edit_group_ = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_k65ld")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_yria3")
+region_enabled = true
+region_rect = Rect2(48, 48, 16, 16)
