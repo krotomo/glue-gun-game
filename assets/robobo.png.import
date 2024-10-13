@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://6j0uf8ufup8q"
-path="res://.godot/imported/cursor.png-9207886fa5a62b74129e260ee150454e.ctex"
+uid="uid://ue2u2kmjpw5j"
+path="res://.godot/imported/robobo.png-de6e778da351e5e216f989a132b398ef.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://cursor.png"
-dest_files=["res://.godot/imported/cursor.png-9207886fa5a62b74129e260ee150454e.ctex"]
+source_file="res://assets/robobo.png"
+dest_files=["res://.godot/imported/robobo.png-de6e778da351e5e216f989a132b398ef.ctex"]
 
 [params]
 

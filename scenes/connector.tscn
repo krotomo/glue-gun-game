@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://3oncxt2yjuo7"]
+
+[ext_resource type="Script" path="res://scripts/connector.gd" id="1_u7oc1"]
+[ext_resource type="Texture2D" uid="uid://clm0b2p3x0h36" path="res://assets/connector.png" id="1_uy2d7"]
+[ext_resource type="Texture2D" uid="uid://bynuoja8svwj6" path="res://assets/connector_connected.png" id="2_34k37"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_6nixg"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_34k37")
+}],
+"loop": true,
+"name": &"connected",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_uy2d7")
+}],
+"loop": true,
+"name": &"ready",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_43b01"]
+size = Vector2(2, 2)
+
+[node name="Connector" type="Area2D" groups=["clickable"]]
+script = ExtResource("1_u7oc1")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="."]
+z_index = 1
+sprite_frames = SubResource("SpriteFrames_6nixg")
+animation = &"connected"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_43b01")
