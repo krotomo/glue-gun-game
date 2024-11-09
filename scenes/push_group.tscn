@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://cji7kxp243sfq"]
+
+[ext_resource type="PackedScene" uid="uid://cy2tvrcuraijh" path="res://scenes/block_group.tscn" id="1_3gbux"]
+[ext_resource type="PackedScene" uid="uid://cwdmt308vy184" path="res://scenes/block.tscn" id="2_t23kf"]
+
+[node name="PushGroup" instance=ExtResource("1_3gbux")]
+
+[node name="Block" parent="." index="0" instance=ExtResource("2_t23kf")]
+type = 1
+
+[node name="Sprite2D" parent="Block" index="0"]
+region_rect = Rect2(224, 96, 32, 32)
+
+[editable path="Block"]

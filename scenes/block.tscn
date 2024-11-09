@@ -1,40 +1,30 @@
-[gd_scene load_steps=5 format=3 uid="uid://cwdmt308vy184"]
+[gd_scene load_steps=4 format=3 uid="uid://cwdmt308vy184"]
 
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_8rrkd"]
 [ext_resource type="Texture2D" uid="uid://cnn2dvf28ivx0" path="res://assets/tiles.png" id="1_ge3ow"]
 [ext_resource type="PackedScene" uid="uid://3oncxt2yjuo7" path="res://scenes/connector.tscn" id="3_1p3oj"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bs5se"]
-size = Vector2(16, 16)
-
-[node name="Block" type="Area2D"]
+[node name="Block" type="Node2D"]
 script = ExtResource("1_8rrkd")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ge3ow")
 region_enabled = true
-region_rect = Rect2(48, 48, 16, 16)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("RectangleShape2D_bs5se")
+region_rect = Rect2(96, 96, 32, 32)
 
 [node name="Left" parent="." instance=ExtResource("3_1p3oj")]
-position = Vector2(-8, 0)
+position = Vector2(-16, 0)
 
 [node name="Right" parent="." instance=ExtResource("3_1p3oj")]
-position = Vector2(8, 0)
+position = Vector2(16, 0)
 
 [node name="Top" parent="." instance=ExtResource("3_1p3oj")]
-position = Vector2(0, -8)
+position = Vector2(0, -16)
 
-[node name="Bottom" parent="." instance=ExtResource("3_1p3oj")]
-position = Vector2(0, 8)
+[node name="Bottom" parent="." groups=["block"] instance=ExtResource("3_1p3oj")]
+position = Vector2(0, 16)
 
 [connection signal="area_entered" from="Left" to="." method="_on_left_area_entered"]
-[connection signal="disconnect" from="Left" to="." method="_on_left_disconnect"]
 [connection signal="area_entered" from="Right" to="." method="_on_right_area_entered"]
-[connection signal="disconnect" from="Right" to="." method="_on_right_disconnect"]
 [connection signal="area_entered" from="Top" to="." method="_on_top_area_entered"]
-[connection signal="disconnect" from="Top" to="." method="_on_top_disconnect"]
 [connection signal="area_entered" from="Bottom" to="." method="_on_bottom_area_entered"]
-[connection signal="disconnect" from="Bottom" to="." method="_on_bottom_disconnect"]

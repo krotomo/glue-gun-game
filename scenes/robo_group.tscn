@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://ccqmjb0f26nkl"]
+
+[ext_resource type="PackedScene" uid="uid://cy2tvrcuraijh" path="res://scenes/block_group.tscn" id="1_lvy74"]
+[ext_resource type="PackedScene" uid="uid://b37oq7t8whr30" path="res://scenes/robobo.tscn" id="2_1ruas"]
+
+[node name="RoboGroup" instance=ExtResource("1_lvy74")]
+
+[node name="Robobo" parent="." index="0" instance=ExtResource("2_1ruas")]

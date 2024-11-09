@@ -1,10 +1,12 @@
 class_name Connector
 extends Area2D
-signal disconnect
+signal create_connection(this, other)
+signal delete_connection()
 
-enum States { IDLE, READY, CONNECTED }
+enum States { DISABLED, IDLE, READY, CONNECTED, LOCKED }
 @export var state : States = States.IDLE
-@export var sprite : AnimatedSprite2D
+@export var other : Connector = null
+var sprite : AnimatedSprite2D
 
 
 func _ready():
@@ -12,6 +14,16 @@ func _ready():
 
 
 func _process(_delta):
+	if (state == States.READY):
+		var areas = get_overlapping_areas()
+		for area in areas:
+			if area is Connector and (
+				area.state == States.READY or
+				area.state == States.IDLE
+			):
+				create_connection.emit(self, area)
+
+
 	if state == States.CONNECTED:
 		sprite.play("connected")
 	else:
@@ -27,4 +39,4 @@ func _process(_delta):
 
 
 func disconnect_connector():
-	disconnect.emit()
+	delete_connection.emit(self)

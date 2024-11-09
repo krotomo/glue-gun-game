@@ -1,0 +1,8 @@
+[gd_scene load_steps=3 format=3 uid="uid://cfu3nl2h0gnqv"]
+
+[ext_resource type="PackedScene" uid="uid://cy2tvrcuraijh" path="res://scenes/block_group.tscn" id="1_tyals"]
+[ext_resource type="PackedScene" uid="uid://cwdmt308vy184" path="res://scenes/block.tscn" id="2_hlwfv"]
+
+[node name="WallGroup" instance=ExtResource("1_tyals")]
+
+[node name="Block" parent="." index="0" instance=ExtResource("2_hlwfv")]
