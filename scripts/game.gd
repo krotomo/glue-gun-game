@@ -15,7 +15,7 @@ func _process(_delta):
 	var mouse_position = reference_node.get_global_mouse_position()
 	var min_distance = 8
 	var selected_connector = null
-	var connectors = get_tree().get_nodes_in_group("clickable")
+	var connectors = get_tree().get_nodes_in_group("connector")
 	for connector in connectors:
 		var distance = (
 			mouse_position - connector.global_position).length()

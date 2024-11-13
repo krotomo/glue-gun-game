@@ -26,7 +26,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_43b01"]
 size = Vector2(2, 2)
 
-[node name="Connector" type="Area2D" groups=["clickable"]]
+[node name="Connector" type="Area2D" groups=["connector"]]
 script = ExtResource("1_u7oc1")
 
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
