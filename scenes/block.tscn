@@ -14,17 +14,20 @@ region_rect = Rect2(96, 96, 32, 32)
 
 [node name="Left" parent="." instance=ExtResource("3_1p3oj")]
 position = Vector2(-16, 0)
+direction = 2
 
 [node name="Right" parent="." instance=ExtResource("3_1p3oj")]
 position = Vector2(16, 0)
+direction = 3
 
-[node name="Top" parent="." instance=ExtResource("3_1p3oj")]
+[node name="Up" parent="." instance=ExtResource("3_1p3oj")]
 position = Vector2(0, -16)
 
-[node name="Bottom" parent="." instance=ExtResource("3_1p3oj")]
+[node name="Down" parent="." instance=ExtResource("3_1p3oj")]
 position = Vector2(0, 16)
+direction = 1
 
 [connection signal="area_entered" from="Left" to="." method="_on_left_area_entered"]
 [connection signal="area_entered" from="Right" to="." method="_on_right_area_entered"]
-[connection signal="area_entered" from="Top" to="." method="_on_top_area_entered"]
-[connection signal="area_entered" from="Bottom" to="." method="_on_bottom_area_entered"]
+[connection signal="area_entered" from="Up" to="." method="_on_top_area_entered"]
+[connection signal="area_entered" from="Down" to="." method="_on_bottom_area_entered"]

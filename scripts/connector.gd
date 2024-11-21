@@ -4,7 +4,9 @@ signal create_connection(this, other)
 signal delete_connection()
 
 enum States { DISABLED, IDLE, READY, CONNECTED, LOCKED }
+enum Direction { UP, DOWN, LEFT, RIGHT }
 @export var state : States = States.IDLE
+@export var direction : Direction = Direction.UP
 @export var other : Connector = null
 var sprite : AnimatedSprite2D
 
