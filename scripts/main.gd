@@ -34,4 +34,39 @@ func add_connection(connector_a: Connector, connector_b: Connector, direction: C
 	connector_b.other = connector_a
 	connector_a.state = Connector.States.CONNECTED
 	connector_b.state = Connector.States.CONNECTED
-	print(block_groups)
+
+
+func delete_connection(connector: Connector):
+	var block_a = connector.get_parent()
+	var block_b = connector.other.get_parent()
+	var block_group = get_block_group(block_a)
+	connector.other.other = null
+	connector.other.state = Connector.States.IDLE
+	connector.other = null
+	connector.state = Connector.States.IDLE
+
+	# Use BFS to find all connected blocks starting from block_a
+	var queue = [block_a]
+	var visited = {block_a: true}
+	var connected_blocks = [block_a]
+	
+	while queue.size() > 0:
+		var current = queue.pop_front()
+		for dir in [current.left, current.right, current.up, current.down]:
+			if dir.other == null:
+				continue
+			var next_block = dir.other.get_parent()
+			if next_block in visited:
+				continue
+			visited[next_block] = true
+			queue.append(next_block)
+			connected_blocks.append(next_block)
+	
+	# If block_b is not in connected blocks, create new group
+	if block_b not in visited:
+		var new_group = BlockGroup.new()
+		for block in block_group.blocks:
+			if block not in visited:
+				new_group.blocks.append(block)
+				block_group.blocks.erase(block)
+		block_groups.append(new_group)

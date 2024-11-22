@@ -28,4 +28,4 @@ func on_create_connection(this_connector, other_connector):
 
 
 func on_delete_connection(this_connector):
-	delete_connection.emit(this_connector)
+	Game.reference_node.delete_connection(this_connector)
