@@ -1,7 +1,5 @@
 class_name Block
 extends Node2D
-signal create_connection(this_area, other_area)
-signal delete_connection(connector)
 
 enum Type { PLAYER, SOLID, WALL }
 @export var type : Type = Type.WALL
@@ -10,6 +8,8 @@ enum Type { PLAYER, SOLID, WALL }
 @onready var up = $Up
 @onready var down = $Down
 @onready var id = Game.block_id()
+const SIZE = 32
+var remainder : Vector2 = Vector2.ZERO
 
 
 func _ready():

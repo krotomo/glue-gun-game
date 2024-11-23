@@ -13,6 +13,24 @@ func _ready():
 		block_groups.append(group)
 
 
+func _physics_process(delta):
+	pass
+
+
+func collision_check(block_group_a: BlockGroup, block_group_b: BlockGroup, offset: Vector2):
+	for block_a in block_group_a.blocks:
+		for block_b in block_group_b.blocks:
+			var new_position = block_a.position + offset
+			if (
+				new_position.x + Block.SIZE / 2 >= block_b.position.x - Block.SIZE / 2 and 
+				new_position.x - Block.SIZE / 2 <= block_b.position.x + Block.SIZE / 2 and 
+				new_position.y + Block.SIZE / 2 >= block_b.position.y - Block.SIZE / 2 and 
+				new_position.y - Block.SIZE / 2 <= block_b.position.y + Block.SIZE / 2
+			):
+				return true
+	return false
+
+
 func get_block_group(block: Block) -> BlockGroup:
 	for group in block_groups:
 		if block in group.blocks:

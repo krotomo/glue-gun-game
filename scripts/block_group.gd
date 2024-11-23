@@ -3,8 +3,14 @@ extends RefCounted
 
 enum Type { PLAYER, SOLID, WALL }
 
+const GRAVITY = 1000
+const ACCELERATION = 1000
+const MAX_SPEED = 100
+const JUMP_SPEED = 200
+
 var blocks = []
 var type = Type.SOLID
+var velocity : Vector2 = Vector2.ZERO
 
 
 func _calculate_type() -> Type:
