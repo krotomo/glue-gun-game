@@ -5,6 +5,7 @@ extends Node2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	print("Main ready")
 	Game.reference_node = self
 	var block_list = get_tree().get_nodes_in_group("block")
 	for block in block_list:
@@ -14,20 +15,24 @@ func _ready():
 
 
 func _physics_process(delta):
-	pass
+	for group in block_groups:
+		group.process(delta)
 
 
-func collision_check(block_group_a: BlockGroup, block_group_b: BlockGroup, offset: Vector2):
+func collision_check(block_group_a: BlockGroup, offset: Vector2):
 	for block_a in block_group_a.blocks:
-		for block_b in block_group_b.blocks:
-			var new_position = block_a.position + offset
-			if (
-				new_position.x + Block.SIZE / 2 >= block_b.position.x - Block.SIZE / 2 and 
-				new_position.x - Block.SIZE / 2 <= block_b.position.x + Block.SIZE / 2 and 
-				new_position.y + Block.SIZE / 2 >= block_b.position.y - Block.SIZE / 2 and 
-				new_position.y - Block.SIZE / 2 <= block_b.position.y + Block.SIZE / 2
-			):
-				return true
+		for group in block_groups:
+			if group == block_group_a:
+				continue
+			for block_b in group.blocks:
+				var new_position = block_a.global_position + offset
+				if (
+					new_position.x + Block.SIZE / 2 >= block_b.global_position.x - Block.SIZE / 2 and 
+					new_position.x - Block.SIZE / 2 <= block_b.global_position.x + Block.SIZE / 2 and 
+					new_position.y + Block.SIZE / 2 >= block_b.global_position.y - Block.SIZE / 2 and 
+					new_position.y - Block.SIZE / 2 <= block_b.global_position.y + Block.SIZE / 2
+				):
+					return true
 	return false
 
 
@@ -46,8 +51,12 @@ func add_connection(connector_a: Connector, connector_b: Connector, direction: C
 	var block_group_a = get_block_group(block_a)
 	var block_group_b = get_block_group(block_b)
 	if block_group_a != block_group_b:
+		print("Merged block groups:")
+		print("- Group A blocks: ", block_group_a.blocks)
+		print("- Group B blocks: ", block_group_b.blocks)
 		block_group_a.merge(block_group_b)
 		block_groups.erase(block_group_b)
+		print("- Resulting merged group: ", block_group_a.blocks)
 	connector_a.other = connector_b
 	connector_b.other = connector_a
 	connector_a.state = Connector.States.CONNECTED
@@ -82,9 +91,13 @@ func delete_connection(connector: Connector):
 	
 	# If block_b is not in connected blocks, create new group
 	if block_b not in visited:
+		print("Split into separate block groups:")
+		print("- Original group: ", block_group.blocks)
 		var new_group = BlockGroup.new()
 		for block in block_group.blocks:
 			if block not in visited:
 				new_group.blocks.append(block)
 				block_group.blocks.erase(block)
 		block_groups.append(new_group)
+		print("- Group 1 after split: ", block_group.blocks)
+		print("- Group 2 after split: ", new_group.blocks)

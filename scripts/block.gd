@@ -9,10 +9,10 @@ enum Type { PLAYER, SOLID, WALL }
 @onready var down = $Down
 @onready var id = Game.block_id()
 const SIZE = 32
-var remainder : Vector2 = Vector2.ZERO
 
 
 func _ready():
+	print("Block ready")
 	left.create_connection.connect(on_create_connection)
 	right.create_connection.connect(on_create_connection)
 	up.create_connection.connect(on_create_connection)

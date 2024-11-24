@@ -12,7 +12,6 @@ script = ExtResource("1_n8eol")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-44, -8)
-zoom = Vector2(2, 2)
 script = ExtResource("3_51dll")
 
 [node name="Cursor" type="Sprite2D" parent="Camera2D"]
@@ -22,14 +21,48 @@ position = Vector2(58, -60)
 texture = ExtResource("1_u7vuo")
 region_rect = Rect2(0, 0, 7, 7)
 
+[node name="Robobo" parent="." instance=ExtResource("5_6w1vh")]
+position = Vector2(11, -41)
+
 [node name="Block" parent="." instance=ExtResource("4_vet7f")]
-position = Vector2(-24, 33)
+position = Vector2(-26, 26)
 
 [node name="Block2" parent="." instance=ExtResource("4_vet7f")]
-position = Vector2(8, 33)
+position = Vector2(6, 26)
 
 [node name="Block3" parent="." instance=ExtResource("4_vet7f")]
-position = Vector2(40, 33)
+position = Vector2(38, 26)
 
-[node name="Robobo" parent="." instance=ExtResource("5_6w1vh")]
-position = Vector2(10, -34)
+[node name="Block4" parent="." instance=ExtResource("4_vet7f")]
+position = Vector2(70, 26)
+
+[node name="Block5" parent="." instance=ExtResource("4_vet7f")]
+position = Vector2(102, 26)
+
+[node name="Block6" parent="." instance=ExtResource("4_vet7f")]
+position = Vector2(134, 26)
+
+[node name="Block7" parent="." instance=ExtResource("4_vet7f")]
+position = Vector2(134, -6)
+
+[node name="Block8" parent="." instance=ExtResource("4_vet7f")]
+position = Vector2(134, -38)
+
+[node name="Block9" parent="." instance=ExtResource("4_vet7f")]
+position = Vector2(134, -70)
+
+[node name="Block10" parent="." instance=ExtResource("4_vet7f")]
+position = Vector2(134, -102)
+
+[node name="Block11" parent="." instance=ExtResource("4_vet7f")]
+position = Vector2(134, -134)
+
+[node name="Block12" parent="." instance=ExtResource("4_vet7f")]
+position = Vector2(-58, 26)
+
+[node name="Block13" parent="." instance=ExtResource("4_vet7f")]
+position = Vector2(-90, 26)
+
+[node name="Block14" parent="." instance=ExtResource("4_vet7f")]
+position = Vector2(-90, -43)
+type = 1
