@@ -27,10 +27,10 @@ func collision_check(block_group_a: BlockGroup, offset: Vector2):
 			for block_b in group.blocks:
 				var new_position = block_a.global_position + offset
 				if (
-					new_position.x + Block.SIZE / 2 >= block_b.global_position.x - Block.SIZE / 2 and 
-					new_position.x - Block.SIZE / 2 <= block_b.global_position.x + Block.SIZE / 2 and 
-					new_position.y + Block.SIZE / 2 >= block_b.global_position.y - Block.SIZE / 2 and 
-					new_position.y - Block.SIZE / 2 <= block_b.global_position.y + Block.SIZE / 2
+					new_position.x + Block.SIZE / 2 > block_b.global_position.x - Block.SIZE / 2 and 
+					new_position.x - Block.SIZE / 2 < block_b.global_position.x + Block.SIZE / 2 and 
+					new_position.y + Block.SIZE / 2 > block_b.global_position.y - Block.SIZE / 2 and 
+					new_position.y - Block.SIZE / 2 < block_b.global_position.y + Block.SIZE / 2
 				):
 					return true
 	return false
@@ -48,12 +48,32 @@ func add_connection(connector_a: Connector, connector_b: Connector, direction: C
 		return
 	var block_a = connector_a.get_parent()
 	var block_b = connector_b.get_parent()
+	print("Adding connection between ", block_a, " and ", block_b)
 	var block_group_a = get_block_group(block_a)
 	var block_group_b = get_block_group(block_b)
 	if block_group_a != block_group_b:
 		print("Merged block groups:")
 		print("- Group A blocks: ", block_group_a.blocks)
 		print("- Group B blocks: ", block_group_b.blocks)
+		var moving_group
+		if (
+			block_group_a.get_type() == BlockGroup.Type.WALL or (
+				block_group_a.get_type() == BlockGroup.Type.PLAYER and block_group_b.get_type() == BlockGroup.Type.SOLID
+			)
+		):
+			moving_group = block_group_b
+		else:
+			moving_group = block_group_a
+		
+		var offset
+		if moving_group == block_group_a:
+			offset = connector_b.global_position - connector_a.global_position
+		else:
+			offset = connector_a.global_position - connector_b.global_position
+
+		for block in moving_group.blocks:
+			block.global_position += offset
+
 		block_group_a.merge(block_group_b)
 		block_groups.erase(block_group_b)
 		print("- Resulting merged group: ", block_group_a.blocks)
@@ -66,6 +86,7 @@ func add_connection(connector_a: Connector, connector_b: Connector, direction: C
 func delete_connection(connector: Connector):
 	var block_a = connector.get_parent()
 	var block_b = connector.other.get_parent()
+	print("Deleting connection between ", block_a, " and ", block_b)
 	var block_group = get_block_group(block_a)
 	connector.other.other = null
 	connector.other.state = Connector.States.IDLE
@@ -79,6 +100,7 @@ func delete_connection(connector: Connector):
 	
 	while queue.size() > 0:
 		var current = queue.pop_front()
+		print("Visiting ", current)
 		for dir in [current.left, current.right, current.up, current.down]:
 			if dir.other == null:
 				continue
@@ -94,10 +116,13 @@ func delete_connection(connector: Connector):
 		print("Split into separate block groups:")
 		print("- Original group: ", block_group.blocks)
 		var new_group = BlockGroup.new()
+		var blocks_to_move = []
 		for block in block_group.blocks:
 			if block not in visited:
-				new_group.blocks.append(block)
-				block_group.blocks.erase(block)
+				blocks_to_move.append(block)
+		for block in blocks_to_move:
+			new_group.blocks.append(block)
+			block_group.blocks.erase(block)
 		block_groups.append(new_group)
 		print("- Group 1 after split: ", block_group.blocks)
 		print("- Group 2 after split: ", new_group.blocks)

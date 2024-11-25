@@ -15,6 +15,7 @@ var remainder : Vector2 = Vector2.ZERO
 
 func process(delta: float):
 	if get_type() == Type.WALL:
+		velocity = Vector2.ZERO
 		return
 	velocity.y += GRAVITY * delta
 	if get_type() == Type.PLAYER:
