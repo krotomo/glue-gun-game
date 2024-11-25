@@ -5,8 +5,8 @@ enum Type { PLAYER, SOLID, WALL }
 
 const GRAVITY = 1000
 const ACCELERATION = 2500
-const MAX_SPEED = 250
-const JUMP_SPEED = 450
+const MAX_SPEED = 200
+const JUMP_SPEED = 420
 
 var blocks = []
 var velocity : Vector2 = Vector2.ZERO

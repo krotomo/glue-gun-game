@@ -40,37 +40,3 @@ func block_id():
 	var result = next_block_id
 	next_block_id += 1
 	return result
-
-
-func collision_check(this_block_group, offset):
-	var other_block_groups = get_tree().get_nodes_in_group("block_group").filter(
-		func(block_group): return block_group != this_block_group).map(
-			func(block_group): return block_group.find_children(
-				"*", "res://scripts/block.gd"
-			).map(
-				func(block): return rect2_from_position(
-					block.global_position
-				)
-			)
-		)
-	var blocks = this_block_group.find_children("*", "res://scripts/block.gd").map(
-		func(block):
-			var new_position = block.global_position + offset
-			return rect2_from_position(new_position)
-	)
-	var collision = false
-	for block in blocks:
-		for other_block_group in other_block_groups:
-			for other_block in other_block_group:
-				if block.intersects(other_block):
-					collision = true
-	return collision
-
-
-func rect2_from_position(pos):
-	return Rect2i(
-		pos.x - BLOCK_SIZE/2,
-		pos.y - BLOCK_SIZE/2,
-		BLOCK_SIZE,
-		BLOCK_SIZE
-	)
