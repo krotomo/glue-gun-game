@@ -1,6 +1,6 @@
 extends Node2D
 
-@onready var block_groups = []
+@onready var block_groups : Array[BlockGroup] = []
 
 
 # Called when the node enters the scene tree for the first time.
@@ -17,6 +17,12 @@ func _ready():
 func _physics_process(delta):
 	for group in block_groups:
 		group.process(delta)
+	
+
+func add_block(block: Block):
+	var group = BlockGroup.new()
+	group.blocks.append(block)
+	block_groups.append(group)
 
 
 func collision_check(block_group_a: BlockGroup, offset: Vector2):
