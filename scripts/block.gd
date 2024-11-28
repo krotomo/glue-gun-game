@@ -3,6 +3,7 @@ extends Node2D
 
 enum Type { PLAYER, SOLID, WALL }
 @export var type : Type = Type.WALL
+@onready var sprite = $Sprite2D
 @onready var left = $Left
 @onready var right = $Right
 @onready var up = $Up

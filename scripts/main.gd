@@ -19,9 +19,9 @@ func _physics_process(delta):
 		group.process(delta)
 	
 
-func add_block(block: Block):
+func add_blocks(blocks: Array[Block]):
 	var group = BlockGroup.new()
-	group.blocks.append(block)
+	group.blocks.append_array(blocks)
 	block_groups.append(group)
 
 
