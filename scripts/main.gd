@@ -20,6 +20,7 @@ func _physics_process(delta):
 	
 
 func add_blocks(blocks: Array[Block]):
+	print("Adding blocks: ", blocks)
 	var group = BlockGroup.new()
 	group.blocks.append_array(blocks)
 	block_groups.append(group)
@@ -49,7 +50,7 @@ func get_block_group(block: Block) -> BlockGroup:
 	return null
 
 
-func add_connection(connector_a: Connector, connector_b: Connector, direction: Connector.Direction):
+func add_connection(connector_a: Connector, connector_b: Connector):
 	if connector_b not in connector_a.get_overlapping_areas():
 		return
 	var block_a = connector_a.get_parent()

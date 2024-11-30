@@ -1,8 +1,10 @@
 class_name Block
 extends Node2D
 
-enum Type { PLAYER, SOLID, WALL }
+enum Type { WALL, SOLID, PLAYER }
 @export var type : Type = Type.WALL
+@export var texture : Texture2D
+@export var texture_origin : Vector2i
 @onready var sprite = $Sprite2D
 @onready var left = $Left
 @onready var right = $Right
@@ -13,7 +15,9 @@ const SIZE = 32
 
 
 func _ready():
-	print("Block ready")
+	sprite.texture = texture
+	sprite.region_enabled = true
+	sprite.region_rect = Rect2(texture_origin, Vector2(SIZE, SIZE))
 	left.create_connection.connect(on_create_connection)
 	right.create_connection.connect(on_create_connection)
 	up.create_connection.connect(on_create_connection)
@@ -25,7 +29,7 @@ func _ready():
 
 
 func on_create_connection(this_connector, other_connector):
-	Game.reference_node.add_connection(this_connector, other_connector, this_connector.direction)
+	Game.reference_node.add_connection(this_connector, other_connector)
 
 
 func on_delete_connection(this_connector):

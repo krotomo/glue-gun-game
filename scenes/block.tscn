@@ -6,6 +6,8 @@
 
 [node name="Block" type="Node2D" groups=["block"]]
 script = ExtResource("1_8rrkd")
+texture = ExtResource("1_ge3ow")
+texture_origin = Vector2i(96, 96)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("1_ge3ow")

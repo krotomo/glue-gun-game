@@ -6,7 +6,8 @@ enum Type { PLAYER, SOLID, WALL }
 const GRAVITY = 1000
 const ACCELERATION = 2500
 const MAX_SPEED = 200
-const JUMP_SPEED = 420
+const JUMP_SPEED = 440
+const MAX_FALL_SPEED = 800
 
 var blocks = []
 var velocity : Vector2 = Vector2.ZERO
@@ -17,7 +18,7 @@ func process(delta: float):
 	if get_type() == Type.WALL:
 		velocity = Vector2.ZERO
 		return
-	velocity.y += GRAVITY * delta
+	velocity.y = move_toward(velocity.y, MAX_FALL_SPEED, GRAVITY * delta)
 	if get_type() == Type.PLAYER:
 		if Input.is_action_pressed("move_right"):
 			velocity.x = move_toward(velocity.x, MAX_SPEED, ACCELERATION * delta)

@@ -1,7 +1,6 @@
 extends Node
 
 
-const BLOCK_SIZE = 32
 var reference_node : Node2D = null
 var nearest_connector : Connector = null
 var next_block_id = 0

@@ -4,7 +4,6 @@
 [ext_resource type="Texture2D" uid="uid://ue2u2kmjpw5j" path="res://assets/robobo.png" id="1_7y1cg"]
 
 [node name="Robobo" instance=ExtResource("1_0pd24")]
-type = 0
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_7y1cg")
