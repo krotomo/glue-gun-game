@@ -32,7 +32,7 @@ func _process(_delta):
 		elif nearest_connector.state == Connector.States.READY:
 			nearest_connector.state = Connector.States.IDLE
 		else:
-			nearest_connector.disconnect_connector()
+			reference_node.delete_connection(nearest_connector)
 
 
 func block_id():

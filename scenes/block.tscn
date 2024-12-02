@@ -10,8 +10,6 @@ texture = ExtResource("1_ge3ow")
 texture_origin = Vector2i(96, 96)
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-texture = ExtResource("1_ge3ow")
-region_enabled = true
 region_rect = Rect2(96, 96, 32, 32)
 
 [node name="Left" parent="." instance=ExtResource("3_1p3oj")]

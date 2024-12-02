@@ -1,7 +1,5 @@
 class_name Connector
 extends Area2D
-signal create_connection(this, other)
-signal delete_connection()
 
 enum States { DISABLED, IDLE, READY, CONNECTED, LOCKED }
 enum Direction { UP, DOWN, LEFT, RIGHT }
@@ -23,7 +21,7 @@ func _process(_delta):
 				area.state == States.READY or
 				area.state == States.IDLE
 			):
-				create_connection.emit(self, area)
+				Game.reference_node.add_connection(self, area)
 
 
 	if state == States.CONNECTED:
@@ -38,7 +36,3 @@ func _process(_delta):
 		
 	else:
 		sprite.modulate.a = 1
-
-
-func disconnect_connector():
-	delete_connection.emit(self)
