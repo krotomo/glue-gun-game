@@ -1,10 +1,12 @@
-[gd_scene load_steps=6 format=4 uid="uid://c3o64hmq6btko"]
+[gd_scene load_steps=8 format=4 uid="uid://c3o64hmq6btko"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_n8eol"]
 [ext_resource type="Texture2D" uid="uid://6j0uf8ufup8q" path="res://assets/cursor.png" id="1_u7vuo"]
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="3_51dll"]
 [ext_resource type="TileSet" uid="uid://j4g5u5c6b05k" path="res://assets/tile_set.tres" id="4_1jhi4"]
 [ext_resource type="Script" path="res://scripts/tile_map_layer.gd" id="5_tbeok"]
+[ext_resource type="PackedScene" uid="uid://d2cbcloesqv0b" path="res://scenes/door.tscn" id="6_o5qv1"]
+[ext_resource type="PackedScene" uid="uid://dyeaoy0wydm8h" path="res://scenes/levels/level_1.tscn" id="7_s36e8"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(-11, -5)
@@ -25,3 +27,7 @@ region_rect = Rect2(0, 0, 7, 7)
 tile_map_data = PackedByteArray("AAD9/wIAAAAGAAYAAAD+/wIAAAAGAAYAAAD//wIAAAAGAAYAAAAAAAIAAAAGAAYAAAABAAIAAAAGAAYAAAACAAIAAAAGAAYAAAADAAIAAAAGAAYAAAAEAAIAAAAGAAYAAAAEAAEAAAAGAAYAAAAEAAAAAAAGAAYAAAAEAP//AAAGAAYAAAAEAP7/AAAGAAYAAAAEAP3/AAAGAAYAAAAFAP3/AAAGAAYAAAAGAP3/AAAGAAYAAAAHAP3/AAAGAAYAAAD8/wIAAAAGAAYAAAD7/wIAAAAGAAYAAAD6/wIAAAAGAAYAAAD5/wIAAAAGAAYAAAD3/wIAAAAGAAYAAAD4/wIAAAAGAAYAAAD2/wIAAAAGAAYAAAD1/wIAAAAGAAYAAAD7/wAAAAAGAAYAAAD7////AAAGAAYAAAD7//7/AAAGAAYAAAD7//3/AAAGAAYAAAD7//z/AAAGAAYAAAD6//z/AAAGAAYAAAD5//z/AAAGAAYAAAD4//z/AAAGAAYAAAD2//z/AAAGAAYAAAD1//z/AAAGAAYAAAD3//z/AAAGAAYAAAD1//3/AAAGAAYAAAD1//7/AAAGAAYAAAD1////AAAGAAYAAAD1/wAAAAAGAAYAAAD1/wEAAAAGAAYAAAD7/wEAAAAOAAYAAAD4/wEAAQAAAAAAAAD7//v/AAAGAAYAAAD7//r/AAAGAAYAAAD7//n/AAAGAAYAAAD8//n/AAAGAAYAAAD9//n/AAAGAAYAAAD+//n/AAAGAAYAAAD///n/AAAGAAYAAAAAAPn/AAAGAAYAAAABAPn/AAAGAAYAAAACAPn/AAAGAAYAAAADAPn/AAAGAAYAAAAEAPn/AAAGAAYAAAAGAPn/AAAGAAYAAAAFAPn/AAAGAAYAAAAHAPn/AAAGAAYAAAAIAPn/AAAGAAYAAAAJAPn/AAAGAAYAAAAKAPn/AAAGAAYAAAAKAPr/AAAGAAYAAAAKAPv/AAAGAAYAAAAKAPz/AAAGAAYAAAAKAP3/AAAGAAYAAAAJAP3/AAAGAAYAAAAIAP3/AAAGAAYAAAA=")
 tile_set = ExtResource("4_1jhi4")
 script = ExtResource("5_tbeok")
+
+[node name="Door" parent="." instance=ExtResource("6_o5qv1")]
+position = Vector2(240, -112)
+target_scene = ExtResource("7_s36e8")

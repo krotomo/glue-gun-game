@@ -1,10 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://cwdmt308vy184"]
+[gd_scene load_steps=5 format=3 uid="uid://cwdmt308vy184"]
 
 [ext_resource type="Script" path="res://scripts/block.gd" id="1_8rrkd"]
 [ext_resource type="Texture2D" uid="uid://cnn2dvf28ivx0" path="res://assets/tiles.png" id="1_ge3ow"]
 [ext_resource type="PackedScene" uid="uid://3oncxt2yjuo7" path="res://scenes/connector.tscn" id="3_1p3oj"]
 
-[node name="Block" type="Node2D" groups=["block"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_u55op"]
+size = Vector2(32, 32)
+
+[node name="Block" type="Area2D" groups=["block"]]
 script = ExtResource("1_8rrkd")
 texture = ExtResource("1_ge3ow")
 texture_origin = Vector2i(96, 96)
@@ -27,7 +30,5 @@ position = Vector2(0, -16)
 position = Vector2(0, 16)
 direction = 1
 
-[connection signal="area_entered" from="Left" to="." method="_on_left_area_entered"]
-[connection signal="area_entered" from="Right" to="." method="_on_right_area_entered"]
-[connection signal="area_entered" from="Up" to="." method="_on_top_area_entered"]
-[connection signal="area_entered" from="Down" to="." method="_on_bottom_area_entered"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_u55op")

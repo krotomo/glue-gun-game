@@ -39,3 +39,7 @@ func block_id():
 	var result = next_block_id
 	next_block_id += 1
 	return result
+
+
+func switch_scene(scene : PackedScene):
+	get_tree().change_scene_to_file(scene.resource_path)

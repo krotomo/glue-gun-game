@@ -1,0 +1,31 @@
+[gd_scene load_steps=7 format=4 uid="uid://dyeaoy0wydm8h"]
+
+[ext_resource type="Script" path="res://scripts/main.gd" id="1_lylu2"]
+[ext_resource type="TileSet" uid="uid://j4g5u5c6b05k" path="res://assets/tile_set.tres" id="2_lbhla"]
+[ext_resource type="Script" path="res://scripts/tile_map_layer.gd" id="3_j6c01"]
+[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="4_uu04h"]
+[ext_resource type="Texture2D" uid="uid://6j0uf8ufup8q" path="res://assets/cursor.png" id="5_660wv"]
+[ext_resource type="PackedScene" uid="uid://d2cbcloesqv0b" path="res://scenes/door.tscn" id="6_817av"]
+
+[node name="Level1" type="Node2D"]
+script = ExtResource("1_lylu2")
+
+[node name="TileMapLayer" type="TileMapLayer" parent="."]
+tile_map_data = PackedByteArray("AAD9/wIAAAAGAAYAAAD+/wIAAAAGAAYAAAD//wIAAAAGAAYAAAAAAAIAAAAGAAYAAAABAAIAAAAGAAYAAAACAAIAAAAGAAYAAAADAAIAAAAGAAYAAAAEAAIAAAAGAAYAAAAEAAEAAAAGAAYAAAAEAAAAAAAGAAYAAAAEAP//AAAGAAYAAAAEAP7/AAAGAAYAAAAEAP3/AAAGAAYAAAAFAP3/AAAGAAYAAAAGAP3/AAAGAAYAAAAHAP3/AAAGAAYAAAD8/wIAAAAGAAYAAAD7/wIAAAAGAAYAAAD6/wIAAAAGAAYAAAD5/wIAAAAGAAYAAAD3/wIAAAAGAAYAAAD4/wIAAAAGAAYAAAD2/wIAAAAGAAYAAAD1/wIAAAAGAAYAAAD7/wAAAAAGAAYAAAD7////AAAGAAYAAAD7//7/AAAGAAYAAAD7//3/AAAGAAYAAAD7//z/AAAGAAYAAAD6//z/AAAGAAYAAAD5//z/AAAGAAYAAAD4//z/AAAGAAYAAAD2//z/AAAGAAYAAAD1//z/AAAGAAYAAAD3//z/AAAGAAYAAAD1//3/AAAGAAYAAAD1//7/AAAGAAYAAAD1////AAAGAAYAAAD1/wAAAAAGAAYAAAD1/wEAAAAGAAYAAAD7/wEAAAAOAAYAAAD4/wEAAQAAAAAAAAD7//v/AAAGAAYAAAD7//r/AAAGAAYAAAD7//n/AAAGAAYAAAD8//n/AAAGAAYAAAD9//n/AAAGAAYAAAD+//n/AAAGAAYAAAD///n/AAAGAAYAAAAAAPn/AAAGAAYAAAABAPn/AAAGAAYAAAACAPn/AAAGAAYAAAADAPn/AAAGAAYAAAAEAPn/AAAGAAYAAAAGAPn/AAAGAAYAAAAFAPn/AAAGAAYAAAAHAPn/AAAGAAYAAAAIAPn/AAAGAAYAAAAJAPn/AAAGAAYAAAAKAPn/AAAGAAYAAAAKAPr/AAAGAAYAAAAKAPv/AAAGAAYAAAAKAPz/AAAGAAYAAAAKAP3/AAAGAAYAAAAJAP3/AAAGAAYAAAAIAP3/AAAGAAYAAAA=")
+tile_set = ExtResource("2_lbhla")
+script = ExtResource("3_j6c01")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(-44, -8)
+script = ExtResource("4_uu04h")
+
+[node name="Cursor" type="Sprite2D" parent="Camera2D"]
+z_index = 100
+texture_filter = 1
+position = Vector2(58, -60)
+texture = ExtResource("5_660wv")
+region_rect = Rect2(0, 0, 7, 7)
+
+[node name="Door" parent="." instance=ExtResource("6_817av")]
+position = Vector2(176, -112)
+target_scene = null
