@@ -21,7 +21,7 @@ func _process(_delta):
 				area.state == States.READY or
 				area.state == States.IDLE
 			):
-				Game.reference_node.add_connection(self, area)
+				Game.get_current_level().add_connection(self, area)
 
 
 	if state == States.CONNECTED:

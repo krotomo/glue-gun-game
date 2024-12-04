@@ -32,7 +32,11 @@ func _process(_delta):
 		elif nearest_connector.state == Connector.States.READY:
 			nearest_connector.state = Connector.States.IDLE
 		else:
-			reference_node.delete_connection(nearest_connector)
+			reference_node.get_current_level().delete_connection(nearest_connector)
+
+
+func get_current_level():
+	return reference_node.get_child(0) if reference_node and reference_node.get_child_count() > 0 else null
 
 
 func block_id():
@@ -42,4 +46,7 @@ func block_id():
 
 
 func switch_scene(scene : PackedScene):
-	get_tree().change_scene_to_file(scene.resource_path)
+	if reference_node.get_child_count() > 0:
+		var current_level = reference_node.get_child(0)
+		current_level.queue_free()
+	reference_node.add_child(scene.instantiate())

@@ -15,6 +15,8 @@ var remainder : Vector2 = Vector2.ZERO
 
 
 func process(delta: float):
+	if !Game.get_current_level():
+		return
 	if get_type() == Type.WALL:
 		velocity = Vector2.ZERO
 		return
@@ -27,7 +29,7 @@ func process(delta: float):
 		else:
 			velocity.x = move_toward(velocity.x, 0, ACCELERATION * delta)
 		
-		if Input.is_action_just_pressed("jump") and Game.reference_node.collision_check(self, Vector2(0, 1)):
+		if Input.is_action_just_pressed("jump") and Game.get_current_level().collision_check(self, Vector2(0, 1)):
 			velocity.y = -JUMP_SPEED
 	elif get_type() == Type.SOLID:
 		velocity.x = move_toward(velocity.x, 0, ACCELERATION * delta)
@@ -39,7 +41,7 @@ func move_x(delta: float):
 	var move = floor(abs(amount))
 	remainder.x = amount - (move * sign(amount))
 	while move > 0:
-		if Game.reference_node.collision_check(self, Vector2(sign(amount), 0)):
+		if Game.get_current_level().collision_check(self, Vector2(sign(amount), 0)):
 			velocity.x = 0
 			break
 		move -= 1
@@ -52,7 +54,7 @@ func move_y(delta: float):
 	var move = floor(abs(amount))
 	remainder.y = amount - (move * sign(amount))
 	while move > 0:
-		if Game.reference_node.collision_check(self, Vector2(0, sign(amount))):
+		if Game.get_current_level().collision_check(self, Vector2(0, sign(amount))):
 			velocity.y = 0
 			break
 		move -= 1

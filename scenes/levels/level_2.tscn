@@ -1,33 +1,33 @@
 [gd_scene load_steps=8 format=4 uid="uid://c3o64hmq6btko"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_n8eol"]
-[ext_resource type="Texture2D" uid="uid://6j0uf8ufup8q" path="res://assets/cursor.png" id="1_u7vuo"]
-[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="3_51dll"]
-[ext_resource type="TileSet" uid="uid://j4g5u5c6b05k" path="res://assets/tile_set.tres" id="4_1jhi4"]
-[ext_resource type="Script" path="res://scripts/tile_map_layer.gd" id="5_tbeok"]
-[ext_resource type="PackedScene" uid="uid://d2cbcloesqv0b" path="res://scenes/door.tscn" id="6_o5qv1"]
-[ext_resource type="PackedScene" uid="uid://dyeaoy0wydm8h" path="res://scenes/levels/level_1.tscn" id="7_s36e8"]
+[ext_resource type="Script" path="res://scripts/level.gd" id="1_404yp"]
+[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="2_j3fwc"]
+[ext_resource type="Texture2D" uid="uid://6j0uf8ufup8q" path="res://assets/cursor.png" id="3_14c33"]
+[ext_resource type="TileSet" uid="uid://j4g5u5c6b05k" path="res://assets/tile_set.tres" id="4_5s7fr"]
+[ext_resource type="Script" path="res://scripts/tile_map_layer.gd" id="5_ra10m"]
+[ext_resource type="PackedScene" uid="uid://d2cbcloesqv0b" path="res://scenes/door.tscn" id="6_ouf6l"]
+[ext_resource type="PackedScene" uid="uid://dyeaoy0wydm8h" path="res://scenes/levels/level_1.tscn" id="7_y2awj"]
 
 [node name="Main" type="Node2D"]
 position = Vector2(-11, -5)
-script = ExtResource("1_n8eol")
+script = ExtResource("1_404yp")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(-44, -8)
-script = ExtResource("3_51dll")
+script = ExtResource("2_j3fwc")
 
 [node name="Cursor" type="Sprite2D" parent="Camera2D"]
 z_index = 100
 texture_filter = 1
 position = Vector2(58, -60)
-texture = ExtResource("1_u7vuo")
+texture = ExtResource("3_14c33")
 region_rect = Rect2(0, 0, 7, 7)
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD9/wIAAAAGAAYAAAD+/wIAAAAGAAYAAAD//wIAAAAGAAYAAAAAAAIAAAAGAAYAAAABAAIAAAAGAAYAAAACAAIAAAAGAAYAAAADAAIAAAAGAAYAAAAEAAIAAAAGAAYAAAAEAAEAAAAGAAYAAAAEAAAAAAAGAAYAAAAEAP//AAAGAAYAAAAEAP7/AAAGAAYAAAAEAP3/AAAGAAYAAAAFAP3/AAAGAAYAAAAGAP3/AAAGAAYAAAAHAP3/AAAGAAYAAAD8/wIAAAAGAAYAAAD7/wIAAAAGAAYAAAD6/wIAAAAGAAYAAAD5/wIAAAAGAAYAAAD3/wIAAAAGAAYAAAD4/wIAAAAGAAYAAAD2/wIAAAAGAAYAAAD1/wIAAAAGAAYAAAD7/wAAAAAGAAYAAAD7////AAAGAAYAAAD7//7/AAAGAAYAAAD7//3/AAAGAAYAAAD7//z/AAAGAAYAAAD6//z/AAAGAAYAAAD5//z/AAAGAAYAAAD4//z/AAAGAAYAAAD2//z/AAAGAAYAAAD1//z/AAAGAAYAAAD3//z/AAAGAAYAAAD1//3/AAAGAAYAAAD1//7/AAAGAAYAAAD1////AAAGAAYAAAD1/wAAAAAGAAYAAAD1/wEAAAAGAAYAAAD7/wEAAAAOAAYAAAD4/wEAAQAAAAAAAAD7//v/AAAGAAYAAAD7//r/AAAGAAYAAAD7//n/AAAGAAYAAAD8//n/AAAGAAYAAAD9//n/AAAGAAYAAAD+//n/AAAGAAYAAAD///n/AAAGAAYAAAAAAPn/AAAGAAYAAAABAPn/AAAGAAYAAAACAPn/AAAGAAYAAAADAPn/AAAGAAYAAAAEAPn/AAAGAAYAAAAGAPn/AAAGAAYAAAAFAPn/AAAGAAYAAAAHAPn/AAAGAAYAAAAIAPn/AAAGAAYAAAAJAPn/AAAGAAYAAAAKAPn/AAAGAAYAAAAKAPr/AAAGAAYAAAAKAPv/AAAGAAYAAAAKAPz/AAAGAAYAAAAKAP3/AAAGAAYAAAAJAP3/AAAGAAYAAAAIAP3/AAAGAAYAAAA=")
-tile_set = ExtResource("4_1jhi4")
-script = ExtResource("5_tbeok")
+tile_set = ExtResource("4_5s7fr")
+script = ExtResource("5_ra10m")
 
-[node name="Door" parent="." instance=ExtResource("6_o5qv1")]
+[node name="Door" parent="." instance=ExtResource("6_ouf6l")]
 position = Vector2(240, -112)
-target_scene = ExtResource("7_s36e8")
+target_scene = ExtResource("7_y2awj")
