@@ -11,7 +11,6 @@ func _ready():
 	for tile in tiles:
 		var block : Block = block_scene.instantiate()
 		block.global_position = to_global(map_to_local(tile))
-		get_parent().call_deferred("add_child", block)
 
 		var tile_data : TileData = get_cell_tile_data(tile)
 		var source : TileSetAtlasSource = tile_set.get_source(get_cell_source_id(tile))
@@ -21,8 +20,9 @@ func _ready():
 		block.texture_origin = texture_origin.position
 		block.type = tile_data.get_custom_data("type")
 
-		var blocks : Array[Block] = [block]
-		get_parent().call_deferred("add_blocks", blocks)
+		get_parent().call_deferred("add_child", block)
+		print("Added block: ", block)
+	print("Tile map parent: ", get_parent())
 	get_parent().call_deferred("on_blocks_ready")
 	queue_free()
 

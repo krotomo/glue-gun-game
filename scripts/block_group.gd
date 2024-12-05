@@ -15,8 +15,6 @@ var remainder : Vector2 = Vector2.ZERO
 
 
 func process(delta: float):
-	if !Game.get_current_level():
-		return
 	if get_type() == Type.WALL:
 		velocity = Vector2.ZERO
 		return

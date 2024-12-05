@@ -7,11 +7,6 @@ var blocks_ready = false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	print("Level ready")
-	var block_list = get_tree().get_nodes_in_group("block")
-	for block in block_list:
-		var group = BlockGroup.new()
-		group.blocks.append(block)
-		block_groups.append(group)
 
 
 func _physics_process(delta):
@@ -19,19 +14,13 @@ func _physics_process(delta):
 	if !is_inside_tree() or is_queued_for_deletion() or !blocks_ready:
 		print("Skipping physics due to deletion")
 		return
+	print("First block group: ", block_groups[0], " first block: ", block_groups[0].blocks[0].get_parent(), "level: ", self)
 	for group in block_groups:
 		group.process(delta)
 
 
 func _exit_tree():
 	block_groups.clear()
-	
-
-func add_blocks(blocks: Array[Block]):
-	print("Adding blocks: ", blocks)
-	var group = BlockGroup.new()
-	group.blocks.append_array(blocks)
-	block_groups.append(group)
 
 
 func collision_check(block_group_a: BlockGroup, offset: Vector2):
@@ -144,5 +133,15 @@ func delete_connection(connector: Connector):
 	
 
 func on_blocks_ready():
+	var block_list = get_tree().get_nodes_in_group("block").filter(
+		func(block): return self.is_ancestor_of(block)
+	)
+	for block in block_list:
+		print("Adding block: ", block)
+		var group = BlockGroup.new()
+		group.blocks.append(block)
+		block_groups.append(group)
+	print("Block groups: ", block_groups)
+	print("First block group: ", block_groups[0], " first block: ", block_groups[0].blocks[0].get_parent(), "level: ", self)
 	blocks_ready = true
 	print("Level blocks ready")
