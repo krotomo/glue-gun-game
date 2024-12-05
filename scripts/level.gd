@@ -1,6 +1,7 @@
 extends Node2D
 
 @onready var block_groups : Array[BlockGroup] = []
+var blocks_ready = false
 
 
 # Called when the node enters the scene tree for the first time.
@@ -14,8 +15,16 @@ func _ready():
 
 
 func _physics_process(delta):
+	print("Physics on level: ", self, " queued: ", is_queued_for_deletion())
+	if !is_inside_tree() or is_queued_for_deletion() or !blocks_ready:
+		print("Skipping physics due to deletion")
+		return
 	for group in block_groups:
 		group.process(delta)
+
+
+func _exit_tree():
+	block_groups.clear()
 	
 
 func add_blocks(blocks: Array[Block]):
@@ -132,3 +141,8 @@ func delete_connection(connector: Connector):
 		block_groups.append(new_group)
 		print("- Group 1 after split: ", block_group.blocks)
 		print("- Group 2 after split: ", new_group.blocks)
+	
+
+func on_blocks_ready():
+	blocks_ready = true
+	print("Level blocks ready")

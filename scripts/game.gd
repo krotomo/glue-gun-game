@@ -7,10 +7,8 @@ var next_block_id = 0
 
 
 func _process(_delta):
-	if !reference_node:
+	if !get_current_level():
 		return
-
-
 	var mouse_position = reference_node.get_global_mouse_position()
 	var min_distance = 8
 	var selected_connector = null
@@ -32,7 +30,7 @@ func _process(_delta):
 		elif nearest_connector.state == Connector.States.READY:
 			nearest_connector.state = Connector.States.IDLE
 		else:
-			reference_node.get_current_level().delete_connection(nearest_connector)
+			get_current_level().delete_connection(nearest_connector)
 
 
 func get_current_level():
@@ -46,7 +44,13 @@ func block_id():
 
 
 func switch_scene(scene : PackedScene):
+	print("Switching scene to ", scene)
 	if reference_node.get_child_count() > 0:
 		var current_level = reference_node.get_child(0)
+		print("Current level queued: ", current_level.is_queued_for_deletion())
+		current_level.block_groups.clear()
 		current_level.queue_free()
-	reference_node.add_child(scene.instantiate())
+		print("After queue_free: ", current_level.is_queued_for_deletion())
+	var new_level = scene.instantiate()
+	print("Adding new level")
+	reference_node.add_child(new_level)

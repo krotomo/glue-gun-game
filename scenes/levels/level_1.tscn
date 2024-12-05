@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=4 uid="uid://dyeaoy0wydm8h"]
+[gd_scene load_steps=8 format=4 uid="uid://dyeaoy0wydm8h"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_lylu2"]
 [ext_resource type="TileSet" uid="uid://j4g5u5c6b05k" path="res://assets/tile_set.tres" id="2_lbhla"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="4_uu04h"]
 [ext_resource type="Texture2D" uid="uid://6j0uf8ufup8q" path="res://assets/cursor.png" id="5_660wv"]
 [ext_resource type="PackedScene" uid="uid://d2cbcloesqv0b" path="res://scenes/door.tscn" id="6_817av"]
+[ext_resource type="PackedScene" uid="uid://c3o64hmq6btko" path="res://scenes/levels/level_2.tscn" id="7_kkuuy"]
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_lylu2")
@@ -28,3 +29,4 @@ region_rect = Rect2(0, 0, 7, 7)
 
 [node name="Door" parent="." instance=ExtResource("6_817av")]
 position = Vector2(176, -112)
+target_scene = ExtResource("7_kkuuy")

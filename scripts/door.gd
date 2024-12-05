@@ -5,6 +5,8 @@ extends Area2D
 
 
 func _input(event):
+	if !target_scene:
+		return
 	if event.is_action_pressed("interact"):
 		for area in get_overlapping_areas():
 			if area.is_in_group("block"):
