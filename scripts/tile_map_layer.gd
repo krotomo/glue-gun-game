@@ -1,12 +1,8 @@
 extends TileMapLayer
 
-
 var block_scene : PackedScene = preload("res://scenes/block.tscn")
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	print("Tile map layer ready")
 	var tiles = get_used_cells()
 	for tile in tiles:
 		var block : Block = block_scene.instantiate()
@@ -21,11 +17,9 @@ func _ready():
 		block.type = tile_data.get_custom_data("type")
 
 		get_parent().call_deferred("add_child", block)
-		print("Added block: ", block)
-	print("Tile map parent: ", get_parent())
+	
 	get_parent().call_deferred("on_blocks_ready")
 	queue_free()
-
 
 func _exit_tree():
 	print("Tile map layer exiting tree")

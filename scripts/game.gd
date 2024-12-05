@@ -44,13 +44,10 @@ func block_id():
 
 
 func switch_scene(scene : PackedScene):
-	print("Switching scene to ", scene)
+	print("Switching to new level")
 	if reference_node.get_child_count() > 0:
 		var current_level = reference_node.get_child(0)
-		print("Current level queued: ", current_level.is_queued_for_deletion())
 		current_level.block_groups.clear()
 		current_level.queue_free()
-		print("After queue_free: ", current_level.is_queued_for_deletion())
 	var new_level = scene.instantiate()
-	print("Adding new level")
 	reference_node.add_child(new_level)

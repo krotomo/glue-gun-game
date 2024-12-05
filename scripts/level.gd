@@ -3,25 +3,17 @@ extends Node2D
 @onready var block_groups : Array[BlockGroup] = []
 var blocks_ready = false
 
-
-# Called when the node enters the scene tree for the first time.
 func _ready():
-	print("Level ready")
-
+	print("Level initialized")
 
 func _physics_process(delta):
-	print("Physics on level: ", self, " queued: ", is_queued_for_deletion())
 	if !is_inside_tree() or is_queued_for_deletion() or !blocks_ready:
-		print("Skipping physics due to deletion")
 		return
-	print("First block group: ", block_groups[0], " first block: ", block_groups[0].blocks[0].get_parent(), "level: ", self)
 	for group in block_groups:
 		group.process(delta)
 
-
 func _exit_tree():
 	block_groups.clear()
-
 
 func collision_check(block_group_a: BlockGroup, offset: Vector2):
 	for block_a in block_group_a.blocks:
@@ -39,26 +31,21 @@ func collision_check(block_group_a: BlockGroup, offset: Vector2):
 					return true
 	return false
 
-
 func get_block_group(block: Block) -> BlockGroup:
 	for group in block_groups:
 		if block in group.blocks:
 			return group
 	return null
 
-
 func add_connection(connector_a: Connector, connector_b: Connector):
 	if connector_b not in connector_a.get_overlapping_areas():
 		return
 	var block_a = connector_a.get_parent()
 	var block_b = connector_b.get_parent()
-	print("Adding connection between ", block_a, " and ", block_b)
+	print("Connecting blocks: %s and %s" % [block_a.id, block_b.id])
 	var block_group_a = get_block_group(block_a)
 	var block_group_b = get_block_group(block_b)
 	if block_group_a != block_group_b:
-		print("Merged block groups:")
-		print("- Group A blocks: ", block_group_a.blocks)
-		print("- Group B blocks: ", block_group_b.blocks)
 		var moving_group
 		if (
 			block_group_a.get_type() == BlockGroup.Type.WALL or (
@@ -80,12 +67,10 @@ func add_connection(connector_a: Connector, connector_b: Connector):
 
 		block_group_a.merge(block_group_b)
 		block_groups.erase(block_group_b)
-		print("- Resulting merged group: ", block_group_a.blocks)
 	connector_a.other = connector_b
 	connector_b.other = connector_a
 	connector_a.state = Connector.States.CONNECTED
 	connector_b.state = Connector.States.CONNECTED
-
 
 func delete_connection(connector: Connector):
 	var block_a = connector.get_parent()
