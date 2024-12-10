@@ -1,9 +1,13 @@
 [gd_scene format=3 uid="uid://d3ifynyaqjt1b"]
 
 [node name="VSplitContainer" type="VSplitContainer"]
-offset_bottom = 8.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="."]
+[node name="Toolbar" type="HBoxContainer" parent="."]
 layout_mode = 2
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
@@ -11,21 +15,33 @@ layout_mode = 2
 
 [node name="SubViewportContainer" type="SubViewportContainer" parent="HSplitContainer"]
 layout_mode = 2
+size_flags_horizontal = 3
+stretch = true
 
 [node name="SubViewport" type="SubViewport" parent="HSplitContainer/SubViewportContainer"]
 handle_input_locally = false
+size = Vector2i(1104, 636)
 render_target_update_mode = 4
 
-[node name="VBoxContainer" type="VBoxContainer" parent="HSplitContainer"]
+[node name="Background" type="ColorRect" parent="HSplitContainer/SubViewportContainer/SubViewport"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="LayerPanel" type="VBoxContainer" parent="HSplitContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+
+[node name="LayerPanelButtons" type="HBoxContainer" parent="HSplitContainer/LayerPanel"]
 layout_mode = 2
 
-[node name="HBoxContainer" type="HBoxContainer" parent="HSplitContainer/VBoxContainer"]
-layout_mode = 2
-
-[node name="Button" type="Button" parent="HSplitContainer/VBoxContainer/HBoxContainer"]
+[node name="AddLayerButton" type="Button" parent="HSplitContainer/LayerPanel/LayerPanelButtons"]
 layout_mode = 2
 text = "+"
 
-[node name="Button2" type="Button" parent="HSplitContainer/VBoxContainer/HBoxContainer"]
+[node name="RemoveLayerButton" type="Button" parent="HSplitContainer/LayerPanel/LayerPanelButtons"]
 layout_mode = 2
 text = "-"
