@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://d3ifynyaqjt1b"]
+[gd_scene load_steps=2 format=3 uid="uid://d3ifynyaqjt1b"]
+
+[ext_resource type="Script" path="res://editor/editor.gd" id="1_w3mdt"]
 
 [node name="VSplitContainer" type="VSplitContainer"]
 anchors_preset = 15
@@ -6,6 +8,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_w3mdt")
 
 [node name="Toolbar" type="HBoxContainer" parent="."]
 layout_mode = 2
@@ -45,3 +48,6 @@ text = "+"
 [node name="RemoveLayerButton" type="Button" parent="HSplitContainer/LayerPanel/LayerPanelButtons"]
 layout_mode = 2
 text = "-"
+
+[node name="LayerList" type="VBoxContainer" parent="HSplitContainer/LayerPanel"]
+layout_mode = 2
