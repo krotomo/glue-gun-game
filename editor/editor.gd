@@ -1,32 +1,22 @@
 extends VSplitContainer
 
+@export var tile_set: TileSet
+@onready var tile_container = $HSplitContainer/VBoxContainer/TileContainer
 
-@onready var add_layer_button = $HSplitContainer/LayerPanel/LayerPanelButtons/AddLayerButton
-@onready var remove_layer_button = $HSplitContainer/LayerPanel/LayerPanelButtons/RemoveLayerButton
-@onready var layer_list = $HSplitContainer/LayerPanel/LayerList
-var layer_id = 0
-var layer_button_group = ButtonGroup.new()
-var selected_layer_id = -1
 
 func _ready():
-	add_layer_button.pressed.connect(add_layer)
-	remove_layer_button.pressed.connect(remove_layer)
-
-
-func add_layer():
-	var id = layer_id
-	layer_id += 1
-
-	var button = Button.new()
-	button.toggle_mode = true
-	button.button_group = layer_button_group
-	button.text = "Layer " + str(id)
-	layer_list.add_child(button)
-
-
-func remove_layer():
-	for child in layer_list.get_children():
-		if child is Button:
-			if child.button_pressed:
-				child.queue_free()
-				break
+	for idx in range(tile_set.get_source_count()):
+		var source_id = tile_set.get_source_id(idx)
+		var source : TileSetAtlasSource = tile_set.get_source(source_id)
+		var texture = source.texture
+		var dimensions = source.get_atlas_grid_size()
+		print(dimensions)
+		for row in range(dimensions.y):
+			for col in range(dimensions.x):
+				var atlas_texture = AtlasTexture.new()
+				atlas_texture.atlas = texture
+				atlas_texture.region = Rect2i(col * Block.SIZE, row * Block.SIZE, Block.SIZE, Block.SIZE)
+				var button = TextureButton.new()
+				button.size = Vector2i(Block.SIZE, Block.SIZE)
+				button.texture_normal = atlas_texture
+				tile_container.add_child(button)

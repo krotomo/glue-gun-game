@@ -7,4 +7,3 @@
 
 [node name="Sprite2D" parent="." index="0"]
 texture = ExtResource("1_7y1cg")
-region_enabled = false
