@@ -1,19 +1,69 @@
-[gd_scene load_steps=8 format=4 uid="uid://dyeaoy0wydm8h"]
+[gd_scene load_steps=12 format=4 uid="uid://dyeaoy0wydm8h"]
 
 [ext_resource type="Script" path="res://scripts/level.gd" id="1_lylu2"]
-[ext_resource type="TileSet" uid="uid://j4g5u5c6b05k" path="res://assets/tile_set.tres" id="2_lbhla"]
+[ext_resource type="Texture2D" uid="uid://cnn2dvf28ivx0" path="res://assets/tiles.png" id="2_23w7f"]
 [ext_resource type="Script" path="res://scripts/tile_map_layer.gd" id="3_j6c01"]
+[ext_resource type="Texture2D" uid="uid://ue2u2kmjpw5j" path="res://assets/robobo.png" id="3_lakvt"]
 [ext_resource type="Script" path="res://scripts/camera_2d.gd" id="4_uu04h"]
 [ext_resource type="Texture2D" uid="uid://6j0uf8ufup8q" path="res://assets/cursor.png" id="5_660wv"]
 [ext_resource type="PackedScene" uid="uid://d2cbcloesqv0b" path="res://scenes/door.tscn" id="6_817av"]
 [ext_resource type="PackedScene" uid="uid://c3o64hmq6btko" path="res://scenes/levels/level_2.tscn" id="7_kkuuy"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eowo8"]
+texture = ExtResource("2_23w7f")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+0:2/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+0:3/0 = 0
+1:3/0 = 0
+2:3/0 = 0
+3:3/0 = 0
+0:4/0 = 0
+1:4/0 = 0
+2:4/0 = 0
+3:4/0 = 0
+0:5/0 = 0
+1:5/0 = 0
+2:5/0 = 0
+3:5/0 = 0
+0:6/0 = 0
+1:6/0 = 0
+2:6/0 = 0
+3:6/0 = 0
+0:7/0 = 0
+1:7/0 = 0
+2:7/0 = 0
+3:7/0 = 0
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_1r3tp"]
+texture = ExtResource("3_lakvt")
+texture_region_size = Vector2i(32, 32)
+0:0/0 = 0
+0:0/0/custom_data_0 = 2
+
+[sub_resource type="TileSet" id="TileSet_3qbhk"]
+tile_size = Vector2i(32, 32)
+custom_data_layer_0/name = "type"
+custom_data_layer_0/type = 2
+sources/1 = SubResource("TileSetAtlasSource_1r3tp")
+sources/0 = SubResource("TileSetAtlasSource_eowo8")
 
 [node name="Level1" type="Node2D"]
 script = ExtResource("1_lylu2")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
 tile_map_data = PackedByteArray("AAD9/wIAAAAGAAYAAAD+/wIAAAAGAAYAAAD//wIAAAAGAAYAAAAAAAIAAAAGAAYAAAABAAIAAAAGAAYAAAACAAIAAAAGAAYAAAADAAIAAAAGAAYAAAAEAAIAAAAGAAYAAAAEAAEAAAAGAAYAAAAEAAAAAAAGAAYAAAAEAP//AAAGAAYAAAAEAP7/AAAGAAYAAAAEAP3/AAAGAAYAAAAFAP3/AAAGAAYAAAAGAP3/AAAGAAYAAAAHAP3/AAAGAAYAAAD8/wIAAAAGAAYAAAD7/wIAAAAGAAYAAAD6/wIAAAAGAAYAAAD5/wIAAAAGAAYAAAD3/wIAAAAGAAYAAAD4/wIAAAAGAAYAAAD2/wIAAAAGAAYAAAD1/wIAAAAGAAYAAAD7/wAAAAAGAAYAAAD7////AAAGAAYAAAD7//7/AAAGAAYAAAD7//3/AAAGAAYAAAD7//z/AAAGAAYAAAD6//z/AAAGAAYAAAD5//z/AAAGAAYAAAD4//z/AAAGAAYAAAD2//z/AAAGAAYAAAD1//z/AAAGAAYAAAD3//z/AAAGAAYAAAD1//3/AAAGAAYAAAD1//7/AAAGAAYAAAD1////AAAGAAYAAAD1/wAAAAAGAAYAAAD1/wEAAAAGAAYAAAD7/wEAAAAOAAYAAAD4/wEAAQAAAAAAAAD7//v/AAAGAAYAAAD7//r/AAAGAAYAAAD7//n/AAAGAAYAAAD8//n/AAAGAAYAAAD9//n/AAAGAAYAAAD+//n/AAAGAAYAAAD///n/AAAGAAYAAAAAAPn/AAAGAAYAAAABAPn/AAAGAAYAAAACAPn/AAAGAAYAAAADAPn/AAAGAAYAAAAEAPn/AAAGAAYAAAAGAPn/AAAGAAYAAAAFAPn/AAAGAAYAAAAHAPn/AAAGAAYAAAAIAPn/AAAGAAYAAAAJAPn/AAAGAAYAAAAKAPn/AAAGAAYAAAAKAPr/AAAGAAYAAAAKAPv/AAAGAAYAAAAKAPz/AAAGAAYAAAAKAP3/AAAGAAYAAAAJAP3/AAAGAAYAAAAIAP3/AAAGAAYAAAA=")
-tile_set = ExtResource("2_lbhla")
+tile_set = SubResource("TileSet_3qbhk")
 script = ExtResource("3_j6c01")
 
 [node name="Camera2D" type="Camera2D" parent="."]
