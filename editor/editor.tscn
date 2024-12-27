@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3ifynyaqjt1b"]
+[gd_scene load_steps=10 format=3 uid="uid://d3ifynyaqjt1b"]
 
 [ext_resource type="Script" path="res://editor/editor.gd" id="1_w3mdt"]
 [ext_resource type="Texture2D" uid="uid://cnn2dvf28ivx0" path="res://assets/tiles.png" id="2_32cww"]
 [ext_resource type="Texture2D" uid="uid://ue2u2kmjpw5j" path="res://assets/robobo.png" id="3_blkno"]
 [ext_resource type="Texture2D" uid="uid://b7j3rg11k43h3" path="res://assets/outline.png" id="4_k158n"]
+[ext_resource type="Script" path="res://editor/tool_button.gd" id="5_6q1vk"]
 [ext_resource type="TileSet" uid="uid://j4g5u5c6b05k" path="res://assets/tile_set.tres" id="5_fkhns"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_eowo8"]
@@ -68,6 +69,19 @@ metadata/_edit_lock_ = true
 
 [node name="Toolbar" type="HBoxContainer" parent="."]
 layout_mode = 2
+alignment = 1
+
+[node name="PaintButton" type="Button" parent="Toolbar"]
+layout_mode = 2
+toggle_mode = true
+text = "paint"
+script = ExtResource("5_6q1vk")
+
+[node name="EraserButton" type="Button" parent="Toolbar"]
+layout_mode = 2
+text = "erase"
+script = ExtResource("5_6q1vk")
+tool = 1
 
 [node name="HSplitContainer" type="HSplitContainer" parent="."]
 layout_mode = 2
@@ -80,7 +94,7 @@ stretch = true
 [node name="SubViewport" type="SubViewport" parent="HSplitContainer/SubViewportContainer"]
 transparent_bg = true
 handle_input_locally = false
-size = Vector2i(1092, 636)
+size = Vector2i(1092, 605)
 render_target_update_mode = 4
 
 [node name="TileMapLayer" type="TileMapLayer" parent="HSplitContainer/SubViewportContainer/SubViewport"]
