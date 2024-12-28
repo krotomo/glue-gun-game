@@ -13,6 +13,7 @@ const ToolButton = preload("res://editor/tool_button.gd")
 @onready var toolbar = $Toolbar
 var tile_button_group = ButtonGroup.new()
 var tool_button_group = ButtonGroup.new()
+var pan_point : Vector2 = Vector2.ZERO
 
 
 func _ready():
@@ -52,18 +53,22 @@ func _ready():
 
 
 func _process(_delta):
+	var mouse_pos = subviewport_container.get_local_mouse_position()
+	if mouse_pos.x < 0 or mouse_pos.y < 0 or mouse_pos.x > subviewport_container.size.x or mouse_pos.y > subviewport_container.size.y:
+		return
 	var tool_button : ToolButton = tool_button_group.get_pressed_button()
 	if tool_button == null:
 		return
-	if Input.is_action_pressed("editor_action"):
+	var world_pos = tile_map_layer.get_canvas_transform().affine_inverse() * mouse_pos
+	var local_pos = tile_map_layer.to_local(world_pos)
+	if Input.is_action_just_pressed("editor_pan"):
+		pan_point = local_pos
+	elif Input.is_action_pressed("editor_pan"):
+		camera.position += pan_point - local_pos
+	elif Input.is_action_pressed("editor_action"):
 		var tile_button : TileButton = tile_button_group.get_pressed_button()
 		if tile_button == null:
 			return
-		var mouse_pos = subviewport_container.get_local_mouse_position()
-		if mouse_pos.x < 0 or mouse_pos.y < 0 or mouse_pos.x > subviewport_container.size.x or mouse_pos.y > subviewport_container.size.y:
-			return
-		var world_pos = tile_map_layer.get_canvas_transform().affine_inverse() * mouse_pos
-		var local_pos = tile_map_layer.to_local(world_pos)
 		var tile_pos = tile_map_layer.local_to_map(local_pos)
 		if tool_button.tool == ToolButton.Tool.PAINT:
 			tile_map_layer.set_cell(tile_pos, tile_button.source_id, tile_button.atlas_coords, false)
